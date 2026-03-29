@@ -9,39 +9,39 @@ Bu belge, Perihelion.ai sisteminin bileşenlerini, veri akışını, ve katmanl�
 ```mermaid
 graph TB
     subgraph External["Dış Kaynaklar"]
-        NOAA["🌐 NOAA SWPC<br/>X-ray JSON API"]
+        NOAA["NOAA SWPC<br/>X-ray JSON API"]
     end
     
     subgraph DataLayer["Veri Katmanı"]
-        Fetch["📥 fetch.py<br/>Veri Çekme"]
-        RawData["💾 data/raw/<br/>xray_flux.csv"]
+        Fetch["fetch.py<br/>Veri Çekme"]
+        RawData["data/raw/<br/>xray_flux.csv"]
     end
     
     subgraph ProcessingLayer["İşleme Katmanı"]
-        Features["⚙️ build_features.py<br/>Özellik Mühendisliği"]
-        ProcessedData["💾 data/processed/<br/>features.csv"]
+        Features["build_features.py<br/>Özellik Mühendisliği"]
+        ProcessedData["data/processed/<br/>features.csv"]
     end
     
     subgraph ModelLayer["Model Katmanı"]
-        Train["🤖 main.py<br/>Model Training"]
-        Model["📦 models/<br/>storm_lgbm.joblib"]
+        Train["main.py<br/>Model Training"]
+        Model["models/<br/>storm_lgbm.joblib"]
     end
     
     subgraph PredictionLayer["Tahmin Servisi"]
-        PredictModule["🔮 predict.py<br/>Tahmin işleme"]
+        PredictModule["predict.py<br/>Tahmin işleme"]
     end
     
     subgraph APILayer["API Katmanı"]
-        API["🚀 Flask API<br/>app.py"]
+        API["Flask API<br/>app.py"]
         Health["GET /health"]
         Predict["GET /api/predict"]
         Mode["POST /api/mode"]
     end
     
     subgraph FrontendLayer["Frontend Katmanı"]
-        HTML["📄 index.html<br/>DOM Yapısı"]
-        JS["⚡ main.js<br/>Lojik & Render"]
-        CSS["🎨 styles.css<br/>Stil & Tema"]
+        HTML["index.html<br/>DOM Yapısı"]
+        JS["main.js<br/>Lojik & Render"]
+        CSS["styles.css<br/>Stil & Tema"]
     end
     
     NOAA --> Fetch
@@ -69,18 +69,18 @@ graph TB
 
 ```mermaid
 graph LR
-    A["🌐 NOAA API<br/>JSON"] 
-    B["📥 urllib.request<br/>& SSL"]
-    C["🔄 JSON Parse<br/>& DataFrame"]
-    D["⏰ DateTime<br/>Conversion"]
-    E["💾 Raw CSV<br/>~2-5 MB"]
-    F["🔍 Load CSV"]
-    G["📊 Lag Features<br/>lag1,3,6"]
-    H["📈 Ratio & Diff<br/>flux_ratio, diff"]
-    I["📉 Rolling Stats<br/>mean_3, mean_6"]
-    J["🏷️ Label Creation<br/>threshold"]
-    K["🧹 Drop NaN<br/>Rows"]
-    L["💾 Processed CSV<br/>~50 KB"]
+    A["NOAA API<br/>JSON"] 
+    B["urllib.request<br/>& SSL"]
+    C["JSON Parse<br/>& DataFrame"]
+    D["DateTime<br/>Conversion"]
+    E["Raw CSV<br/>~2-5 MB"]
+    F["Load CSV"]
+    G["Lag Features<br/>lag1,3,6"]
+    H["Ratio & Diff<br/>flux_ratio, diff"]
+    I["Rolling Stats<br/>mean_3, mean_6"]
+    J["Label Creation<br/>threshold"]
+    K["Drop NaN<br/>Rows"]
+    L["Processed CSV<br/>~50 KB"]
     
     A -->|HTTPS| B
     B --> C
@@ -152,19 +152,19 @@ Output:  models/storm_lgbm.joblib
 
 ```mermaid
 graph TB
-    subgraph Training["🎓 Eğitim Aşaması"]
-        Features["📊 Features<br/>7 sütun"]
-        Split["✂️ Train/Test<br/>80/20 Stratified"]
-        LGB["🤖 LightGBM<br/>200 trees"]
-        Eval["📈 Evaluation<br/>F1, Precision, Recall"]
-        Save["💾 Joblib<br/>Serialize"]
+    subgraph Training["Eğitim Aşaması"]
+        Features["Features<br/>7 sütun"]
+        Split["Train/Test<br/>80/20 Stratified"]
+        LGB["LightGBM<br/>200 trees"]
+        Eval["Evaluation<br/>F1, Precision, Recall"]
+        Save["Joblib<br/>Serialize"]
     end
     
-    subgraph Inference["🔮 Tahmin Aşaması"]
-        Load["📦 Load Model"]
-        Validate["✓ Feature Check"]
-        Predict["📍 Predict Proba"]
-        Risk["⚠️ Risk Status<br/>HIGH/MEDIUM/LOW"]
+    subgraph Inference["Tahmin Aşaması"]
+        Load["Load Model"]
+        Validate["Feature Check"]
+        Predict["Predict Proba"]
+        Risk["Risk Status<br/>HIGH/MEDIUM/LOW"]
     end
     
     Features --> Split
@@ -200,10 +200,9 @@ graph TB
 
 ```
 Probability → Status
-
-P > 0.6  → HIGH RISK   (🔴 Kritik)
-P > 0.3  → MEDIUM RISK (🟡 Uyarı)
-P ≤ 0.3  → LOW RISK    (🟢 Normal)
+P > 0.6  → HIGH RISK   (Kritik)
+P > 0.3  → MEDIUM RISK (Uyarı)
+P ≤ 0.3  → LOW RISK    (Normal)
 ```
 
 ---
@@ -212,8 +211,8 @@ P ≤ 0.3  → LOW RISK    (🟢 Normal)
 
 ```mermaid
 graph TB
-    subgraph Server["🚀 Flask Server<br/>Port 5050"]
-        CORS["🔓 CORS Enabled"]
+    subgraph Server["Flask Server<br/>Port 5050"]
+        CORS["CORS Enabled"]
         
         subgraph Routes["API Routes"]
             R1["GET /health"]
@@ -319,27 +318,27 @@ stateDiagram-v2
 
 ```mermaid
 graph TB
-    subgraph Browser["🌐 Tarayıcı"]
-        DOM["📄 HTML DOM"]
+    subgraph Browser["Tarayıcı"]
+        DOM["HTML DOM"]
         
         subgraph Pages["Sayfa Bölümleri"]
-            Header["🎯 Header<br/>Logo + Status"]
-            PanelL["📊 Panel Left<br/>Telemetri Kartları"]
-            Scene["🎨 Scene Area<br/>3D Render"]
-            PanelR["⚠️ Panel Right<br/>Risk Analysis"]
-            Timeline["📅 Timeline<br/>Event Flow"]
+            Header["Header<br/>Logo + Status"]
+            PanelL["Panel Left<br/>Telemetri Kartları"]
+            Scene["Scene Area<br/>3D Render"]
+            PanelR["Panel Right<br/>Risk Analysis"]
+            Timeline["Timeline<br/>Event Flow"]
         end
         
         subgraph Logic["JavaScript Logic"]
             State["State Mgmt<br/>sim object"]
-            Poll["🔄 Polling<br/>1 sec interval"]
-            Render["🎬 Render Loop<br/>requestAnimFrame"]
+            Poll["Polling<br/>1 sec interval"]
+            Render["Render Loop<br/>requestAnimFrame"]
         end
         
         subgraph Graphics["Grafik Kütüphaneleri"]
-            Chart["📈 Chart.js<br/>Telemetri"]
-            Three["🎯 Three.js<br/>3D Scene"]
-            CSS["🎨 CSS3<br/>Animations"]
+            Chart["Chart.js<br/>Telemetri"]
+            Three["Three.js<br/>3D Scene"]
+            CSS["CSS3<br/>Animations"]
         end
     end
     
@@ -361,24 +360,24 @@ graph TB
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│  🎯 HEADER: Logo + Status Indicator                │
+│  HEADER: Logo + Status Indicator                   │
 ├─────┬─────────────────────────────────┬─────────────┤
 │     │                                 │             │
-│ ← L │   🎨 3D Scene                   │ R →         │
-│             (Scene Area:              │             │
-│ PANELText  Three.js Render)          │ PANEL       │
-│             [800x650]                 │             │
+│ L   │   3D Scene                      │ R           │
+│     │   (Scene Area:                  │             │
+│ PANEL│  Three.js Render)              │ PANEL       │
+│     │   [800x650]                     │             │
 │     │                                 │             │
 ├─────┴─────────────────────────────────┴─────────────┤
-│  📅 TIMELINE: Event Progression (w/ progress bar)   │
+│  TIMELINE: Event Progression (w/ progress bar)      │
 └─────────────────────────────────────────────────────┘
 
 Panel Left (438px):              Panel Right (438px):
-├ 📊 Wind Speed (gauge)         ├ ⚠️ Alert Card
-├ 📊 Proton Density (gauge)     ├ 🔢 Kp Index (scale 1-9)
-├ 📋 Mini-stats (Bz, e-flux)    ├ 📊 Impact List
-├ 📈 Telemetry Chart             └ 🎛️ Controls
-└ 🔘 Connect Button
+├ Wind Speed (gauge)            ├ Alert Card
+├ Proton Density (gauge)        ├ Kp Index (scale 1-9)
+├ Mini-stats (Bz, e-flux)       ├ Impact List
+├ Telemetry Chart               └ Controls
+└ Connect Button
 ```
 
 ### Polling Döngüsü:
@@ -407,23 +406,23 @@ sequenceDiagram
 
 ```mermaid
 graph LR
-    NOAA["🌐 NOAA API"]
+    NOAA["NOAA API"]
     
-    NOAA -->|6h intervals| Fetch["📥 fetch.py"]
-    Fetch -->|urllib.request| RawCSV["💾 raw CSV<br/>~100 rows"]
+    NOAA -->|6h intervals| Fetch["fetch.py"]
+    Fetch -->|urllib.request| RawCSV["raw CSV<br/>~100 rows"]
     
-    RawCSV -->|Read| Features["⚙️ features.py"]
-    Features -->|7 derived<br/>features| ProcessedCSV["💾 processed CSV<br/>~85 rows"]
+    RawCSV -->|Read| Features["features.py"]
+    Features -->|7 derived<br/>features| ProcessedCSV["processed CSV<br/>~85 rows"]
     
-    ProcessedCSV -->|80/20 split| Train["🤖 main.py"]
-    Train -->|LightGBM| Model["📦 joblib"]
+    ProcessedCSV -->|80/20 split| Train["main.py"]
+    Train -->|LightGBM| Model["joblib"]
     
-    Model -->|predict.py| PredService["🔮 Predictions"]
+    Model -->|predict.py| PredService["Predictions"]
     
-    PredService -->|JSON| API["🚀 Flask API"]
-    API -->|REST endpoint| Frontend["🌐 Dashboard"]
+    PredService -->|JSON| API["Flask API"]
+    API -->|REST endpoint| Frontend["Dashboard"]
     
-    Frontend -->|Chart.js<br/>Three.js| Browser["📱 Tarayıcı"]
+    Frontend -->|Chart.js<br/>Three.js| Browser["Tarayıcı"]
     
     style NOAA fill:#1e88e5,stroke:#0d47a1,color:#fff
     style Model fill:#7cb342,stroke:#558b2f,color:#fff
@@ -483,13 +482,13 @@ graph TB
 
 ```mermaid
 graph TB
-    subgraph Dev["🖥️ Geliştirme"]
+    subgraph Dev["Geliştirme"]
         DevPy["Python 3.10+"]
         DevPip["pip install -r requirements.txt"]
         DevRun["python src/api/app.py"]
     end
     
-    subgraph Prod["🚀 Üretim"]
+    subgraph Prod["Üretim"]
         Docker["Docker Container"]
         Gunicorn["Gunicorn<br/>Multi-worker"]
         Nginx["Nginx<br/>Reverse Proxy"]
@@ -497,7 +496,7 @@ graph TB
         Postgres["PostgreSQL<br/>Data"]
     end
     
-    subgraph Monitor["📊 İzleme"]
+    subgraph Monitor["İzleme"]
         Prom["Prometheus"]
         Grafana["Grafana Dashboard"]
         Logs["Centralized Logs"]
@@ -524,10 +523,10 @@ graph TB
 
 ```mermaid
 sequenceDiagram
-    participant Client as 🌐 Client<br/>(Browser)
-    participant Backend as 🚀 Backend<br/>(Flask)
-    participant ML as 🤖 ML Model
-    participant NOAA as 🌐 NOAA API
+    participant Client as Client<br/>(Browser)
+    participant Backend as Backend<br/>(Flask)
+    participant ML as ML Model
+    participant NOAA as NOAA API
 
     Client->>Backend: GET /health
     Backend-->>Client: {"status":"ok",...}
@@ -552,14 +551,14 @@ sequenceDiagram
 
 ```mermaid
 graph TB
-    subgraph Perf["⚡ Performans Hedefleri"]
+    subgraph Perf["Performans Hedefleri"]
         API_P["API Latency<br/>< 50ms"]
         FE_P["Frontend Render<br/>60 FPS"]
         Poll_P["Polling Interval<br/>1 sec"]
         Train_P["Training<br/>< 20 sec"]
     end
     
-    subgraph Scale["🔄 Ölçeklenebilirlik"]
+    subgraph Scale["Ölçeklenebilirlik"]
         Cache["In-Memory Cache<br/>(Model)"]
         Queue["Job Queue<br/>(long tasks)"]
         DB["Database<br/>(persistence)"]
