@@ -1,4 +1,4 @@
-# Perihelion.ai
+# Perihelion.AI
 
 Perihelion.ai, uzay hava verisiyle (NOAA SWPC GOES X-ray) kısa ufuklu risk tahmini denemesi yapan bir makine ogrenmesi hattini ve canli demo panelini birlestiren bir projedir.
 
